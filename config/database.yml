@@ -1,0 +1,104 @@
+######################## Localhost #######################
+default: &default
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: db/development.sqlite3
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+production:
+  <<: *default
+  database: db/production.sqlite3
+# development:
+#   adapter: postgresql
+#   encoding: unicode
+#   host: localhost
+#   database: snm_development
+#   username: snm
+#   password: snm
+
+# test:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: snm_test
+#   host: localhost
+#   username: snm
+#   password: snm
+
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: snm
+#   host: localhost
+#   username: snm
+#   password: snm
+
+
+
+
+
+# development:
+#   adapter: postgresql
+#   host: localhost
+#   database: snm_development
+#   username: snm
+#   password: snm
+
+# test:
+#   adapter: postgresql
+#   database: whatsapp-visit
+#   host: localhost
+#   username: snm_test
+#   password: snm
+
+# production:
+#   adapter: postgresql
+#   database: snm_production
+#   host: localhost
+#   username: snm
+#   password: snm
+
+
+
+## Heroku dtabase setup
+# development:
+#   adapter:  postgresql
+#   host:     localhost
+#   encoding: utf8
+#   database: snm
+#   pool:     5
+#   username: <%= ENV['PG_USERNAME'] %>
+#   password: <%= ENV['PG_PASSWORD'] %>
+#   template: template0
+#   # others options
+
+# test:
+#    adapter:  postgresql
+#    host:     127.0.0.1
+#    encoding: utf8
+#    database: snm
+#    pool:     5
+#    username: <%= ENV['PG_USERNAME'] %>
+#    password: <%= ENV['PG_PASSWORD'] %>
+#    template: template0
+#    # others options
+
+# production:
+#   adapter:  postgresql
+#   host:     127.0.0.1
+#   encoding: utf8
+#   database: snm
+#   pool:     5
+#   username: <%= ENV['PG_USERNAME'] %>
+#   password: <%= ENV['PG_PASSWORD'] %>
+#   template: template0
+#   # others options

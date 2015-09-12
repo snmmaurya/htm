@@ -1,0 +1,88 @@
+<div data-ng-controller="htmController">
+	<div class="col-md-3">
+	  <div class="well">
+		  <span class="htm-heading">Projects:</span>
+		  <ul data-ng-repeat="project in projects">
+		  	<li><a herf="javascript: void(0)" data-ng-click="selectProject(project.id)">{{project.title}}</a></li>
+		  </ul>
+		  <hr>
+		  <span class="htm-heading">Users:</span>
+		  <ul data-ng-repeat="user in users">
+		  	<li><a herf="javascript: void(0)" data-ng-click="selectTask(user.id)">{{user.name}}</a></li>
+		  </ul>
+	  </div>
+	</div>
+
+	<div class="col-md-4">
+	  <div class="well">
+	  	<span class="htm-heading">Tasks:</span>
+		  <ul data-ng-repeat="task in tasks">
+		  	<li><a herf="javascript: void(0)" data-ng-click="selectTask(task.id)">{{task.title | limitTo:50}}...</a></li>
+		  </ul>
+		  <hr>
+		  <a herf="javascript: void(0)" data-ng-click="newTask(task.id, task.project_id, task.user_id)" class="btn btn-default clear">Create New Task</a>
+		  <div data-ng-show="showNewTaskForm">
+				<form class="form-signin" name="newTaskFrom" ng-submit="createTask(params)" novalidate>
+				<h2 class="form-signin-heading">Create New Task</h2>
+				<span class="error" ng-show="error">Fill Title</span>
+				<label for="inputEmail" class="sr-only">Task Title</label>
+				<input type="text" id="title" class="form-control" placeholder="Task Title" required="" autofocus="" ng-model="params.title">
+				<div class="spacer5"></div>
+				<button class="btn btn-info btn-block" type="submit">Create</button>
+				</form>
+		  </div>
+		  <hr>
+	  </div>
+	</div>
+
+	<div class="col-md-5">
+	  <div class="well">
+	  	<div ng-show="taskDetailShow">
+	  	<div class="row">
+	  		<div class="col-sm-6">
+	  		Due Date
+				<p class="input-group">
+					<input type="text" class="form-control" datetime-picker="mediumDate" ng-model="ctrl.dates.date1" is-open="ctrl.open.date1" enable-time="false" datepicker-options="ctrl.dateOptions" date-disabled="ctrl.disabled(date, mode)" close-on-date-selection="false" datepicker-append-to-body="true" clear-text="Remove" />
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="ctrl.openCalendar($event, 'date1')"><i class="fa fa-calendar"></i></button>
+					</span>
+				</p>
+	  		</div>
+	  		<div class="col-sm-6">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">TASK ASSIGNMENT
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+						<li data-ng-repeat="user in users"><a href="javascript: void(0)" data-user-id="user.id" data-ng-click="assignTo(user.id)">{{user.name}}</a></li>
+						</ul>
+					</div>
+
+
+				</div>
+	  	</div>
+
+	  	<div class="htm-heading">Task Details:</div>
+	  	<a href="#" class="block htm-title" editable-text="taskDetails.title" onbeforesave="updateTask({title: $data, id: taskDetails.id})">{{ taskDetails.title || 'empty' }}</a>
+	  	<div class="spacer10"></div>
+		  <div class="description">
+		  	<a href="#" class="block  htm-description" editable-textarea="taskDetails.description" onbeforesave="updateTask({description: $data, id: taskDetails.id})">{{ taskDetails.description || 'empty' }}</a>
+		  </div>
+		  <hr>
+		  Comments:
+		  <ul>
+		  	<li data-ng-repeat="comment in comments">
+		  		<a href="#" class="block  htm-comment" editable-textarea="comment.comment" onbeforesave="updateComment({comment: $data, id: comment.id})">{{ comment.comment || 'No Comment' }}</a>
+		  	</li>
+		  </ul>
+		 	<form class="form-comment" name="newCommentForm" ng-submit="createComment(params)" novalidate>
+			 	<textarea ng-model="params.comment" class="form-control"></textarea>
+			 	<input type="hidden" ng-model="params.task_id" value="{{taskDetails.id}}">
+			 	<div class="spacer5"></div>
+			 	<button class="btn btn-info btn-block" type="submit">Comment</button>
+		 	</form>
+		 	<hr>
+		 	<input type="file" nv-file-select uploader="uploader"/>
+		  </div>
+	  </div>
+	</div>
+</div>

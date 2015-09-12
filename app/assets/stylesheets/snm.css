@@ -1,0 +1,10 @@
+.clear{
+	clear: both;
+}
+.spacer5{
+	height: 5px;
+}
+.spacer10{
+	height: 10px;
+}
+.ta-hidden-input{display: none;}

@@ -1,0 +1,70 @@
+https://github.com/marthyn/angularjs-file-upload-rails
+
+Database Design ------------------------------ 
+
+------------------------------
+roles
+id
+title
+
+admin
+super
+user
+
+
+------------------------------
+users
+id
+name
+email
+status       ACTIVE -- DEACTIVE  --  DELETED
+created_at
+updated_at
+user_id      --- same model as parent model  of only user under super user.
+
+
+has_and_belongs_to_many :tasks
+has_many :projects
+
+
+------------------------------
+projects
+title
+description
+status              --- PENDING -- COMPLETED  -- DEACTIVE  --  DELETED
+created_at
+updated_at
+user_id             --- Always related to super user
+
+
+belongs_to :user
+has_many :tasks
+
+
+
+
+------------------------------ 
+tasks
+title
+description
+attachments
+status              --- PENDING -- COMPLETED  -- DEACTIVE  --  DELETED
+created_by                --- created by user id
+completed_by              --- completed by user id
+
+
+has_many :comments
+has_many :attachments
+has_and_belongs_to_many :users
+belongs_to :project
+
+
+------------------------------ Always Select Last One
+tasks_users
+id
+task_id
+user_id
+
+
+
+
